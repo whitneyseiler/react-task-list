@@ -1,10 +1,10 @@
 {
-  "name": "desktop",
+  "name": "react-task-list",
   "version": "1.0.0",
-  "description": "instafeed",
+  "description": "react-task-list",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js && npm run react-dev",
+    "server": "node server/index.js",
     "react-dev": "webpack -p --watch"
   },
   "author": "whitney seiler",
@@ -18,9 +18,9 @@
     "react-keydown": "^1.9.7"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1"
   }
 }
