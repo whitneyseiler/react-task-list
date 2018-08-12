@@ -1,4 +1,4 @@
-window.taskData = [
+export const tasks = [
   {
     id: 1,
     group: "Purchases",
