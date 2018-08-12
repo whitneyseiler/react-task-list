@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react';
-import TaskGroup from './TaskGroup.jsx';
 
-const TaskList = ({tasks}) => {
+const TaskList = ({tasks, displayList, displayGroup}) => {
 
     return (
-        <div>
-            <h1>Things To Do</h1>
-            {tasks}
+        <div id="task-list">
+            <ul>
+                {displayList ? 
+                    tasks.map((task, index) => {
+                        if (task.group === displayGroup) {
+                            <li key={index}>{task}</li>
+                        }
+                    }) : <h2>Select Group to Display</h2>
+                }
+            </ul>
         </div>
     )
 }
