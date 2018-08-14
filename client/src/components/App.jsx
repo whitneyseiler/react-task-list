@@ -11,10 +11,11 @@ class App extends React.Component {
       tasks: [],
       groups: [],
       displayList: false,
-      displayGroup: "Purchases"
+      displayGroup: null
     }
 
     this.handleGroupSelect = this.handleGroupSelect.bind(this);
+    this.handleTaskClick = this.handleTaskClick.bind(this);
   }
 
   componentDidMount() {
@@ -43,11 +44,37 @@ class App extends React.Component {
     })
   }
 
+  handleTaskClick(e, index) {
+    let tasks = this.state.tasks;
+    var date = new Date();
+    var utcDate = date.toUTCString();
+
+    if (tasks[index].completedAt === null) {
+      tasks[index].completedAt = utcDate
+    } else {
+      tasks[index].completedAt = null;
+    }
+
+    this.setState({
+      tasks: tasks
+    })
+
+  }
+
   render () {
     return (
       <div>
-        <GroupList groups={this.state.groups} displayList={this.state.displayList} handleGroupSelect={this.handleGroupSelect} />
-        <TaskList tasks={this.state.tasks} displayList={this.state.displayList} displayGroup={this.state.displayGroup} />
+        <GroupList 
+          groups={this.state.groups} 
+          displayList={this.state.displayList} 
+          handleGroupSelect={this.handleGroupSelect} 
+        />
+        <TaskList 
+          tasks={this.state.tasks} 
+          displayList={this.state.displayList} 
+          displayGroup={this.state.displayGroup} 
+          handleTaskClick={this.handleTaskClick}
+        />
       </div>
     )
   }

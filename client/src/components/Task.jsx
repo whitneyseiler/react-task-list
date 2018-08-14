@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react';
 
-const Task = ({task}) => {
-    
+const Task = ({index, id, task, handleClick}) => {
+
     return (
-        <li>{task.task}</li>
+        <li 
+            className={task.completedAt === null ? "incomplete" : "completed"}
+            onClick={(e) => {handleClick(e, index)}}
+        >{task.task}</li>
     )
 }
 export default Task;
