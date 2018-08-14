@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react';
 import GroupList from './GroupList.jsx';
 import TaskList from './TaskList.jsx';
-import {tasks} from '../assets/taskData';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +10,7 @@ class App extends React.Component {
     this.state = {
       tasks: [],
       groups: [],
-      displayList: true,
+      displayList: false,
       displayGroup: "Purchases"
     }
 
@@ -36,10 +35,11 @@ class App extends React.Component {
 
   handleGroupSelect(e) {
     e.preventDefault();
+    let selected = e.target.className;
 
-    let selected = e.target.value;
     this.setState({
-      displayGroup: selected
+      displayGroup: selected,
+      displayList: true
     })
   }
 

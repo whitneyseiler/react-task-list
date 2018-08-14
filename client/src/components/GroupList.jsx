@@ -7,9 +7,11 @@ const GroupList = ({groups, handleGroupSelect}) => {
     return (
         <div id="group-list">
             <h1>Things To Do</h1>
-            {groups.map((group, index) => (
-                <h3 className={group} key={index} onClick={(e) => handleGroupSelect(e)}>{group}</h3>
-            ))}
+            <ul className="group-list">
+                {groups.map((group, index) => (
+                    <li className={group} key={index} value={group} onClick={(e) => handleGroupSelect(e)}>{group}</li>
+                ))}
+            </ul>
         </div>
     )
 }
