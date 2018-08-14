@@ -34,9 +34,10 @@ class App extends React.Component {
     })
   }
 
-  handleGroupSelect(e) {
+  handleGroupSelect(e, index) {
     e.preventDefault();
-    let selected = e.target.className;
+    let groups = this.state.groups;
+    let selected = groups[index];
 
     this.setState({
       displayGroup: selected,

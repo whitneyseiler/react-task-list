@@ -8,8 +8,8 @@ const GroupList = ({groups, handleGroupSelect}) => {
         <div id="group-list">
             <h1>Things To Do</h1>
             <ul className="group-list">
-                {groups.map((group, index) => (
-                    <li className={group} key={index} value={group} onClick={(e) => handleGroupSelect(e)}>{group}</li>
+                {groups.map((group, i) => (
+                    <li className="group" key={i} value={group} onClick={(e) => handleGroupSelect(e, i)}>{group}</li>
                 ))}
             </ul>
         </div>

@@ -4,7 +4,7 @@
   "description": "react-task-list",
   "main": "index.js",
   "scripts": {
-    "server": "node server/index.js",
+    "start": "node server/index.js",
     "react-dev": "webpack -d --watch"
   },
   "author": "whitney seiler",
@@ -15,12 +15,15 @@
     "babel-preset-stage-2": "^6.24.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-keydown": "^1.9.7"
+    "react-keydown": "^1.9.7",
+    "svg-url-loader": "^2.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1"
+    "babel-preset-react": "^6.24.1",
+    "file-loader": "^1.1.11",
+    "url-loader": "^1.1.0"
   }
 }
