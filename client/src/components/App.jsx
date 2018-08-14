@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react';
 import GroupList from './GroupList.jsx';
 import TaskList from './TaskList.jsx';
+import {tasks} from '../assets/taskData';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,8 +10,9 @@ class App extends React.Component {
 
     this.state = {
       tasks: [],
-      displayList: false,
-      displayGroup: null
+      groups: [],
+      displayList: true,
+      displayGroup: "Purchases"
     }
 
     this.handleGroupSelect = this.handleGroupSelect.bind(this);
@@ -25,9 +27,9 @@ class App extends React.Component {
         taskGroups.push(task.group);
       }
     })
-
+    
     this.setState({
-      tasks: this.props.tasks,
+      tasks: tasks,
       groups: taskGroups
     })
   }
@@ -43,10 +45,9 @@ class App extends React.Component {
 
   render () {
     return (
-      <div >
-        <h1> test </h1>
-        <GroupList tasks={this.state.tasks} groups={this.state.groups} handleGroupSelect={this.handleGroupSelect}/>
-        <TaskList tasks={this.state.tasks} />
+      <div>
+        <GroupList groups={this.state.groups} displayList={this.state.displayList} handleGroupSelect={this.handleGroupSelect} />
+        <TaskList tasks={this.state.tasks} displayList={this.state.displayList} displayGroup={this.state.displayGroup} />
       </div>
     )
   }
