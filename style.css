@@ -14,10 +14,18 @@ li.completed {
     height: 54px;
     padding-left: 44px;
     padding-top: 3px;
+    text-decoration: line-through;
 }
 
 li.incomplete {
     list-style-image: url('../assets/Incomplete.svg');
+    height: 54px;
+    padding-left: 44px;
+    padding-top: 3px;
+}
+
+li.locked {
+    list-style-image: url('../assets/Locked.svg');
     height: 54px;
     padding-left: 44px;
     padding-top: 3px;
