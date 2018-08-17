@@ -8,7 +8,7 @@ const TaskList = ({tasks, handleReturnClick, displayGroup, displayList, handleTa
         <div id="task-list">
             <div id="task-list-header">
                 <h1 id="task-header" >{displayGroup ? `Task Group: ${displayGroup}` : "Select A Group"}</h1>
-                <button id="return-to-list" onClick={handleReturnClick}>ALL GROUPS</button>
+                <button id="return-button" onClick={handleReturnClick}>ALL GROUPS</button>
             </div>
             <ul>
                 {displayList ? 

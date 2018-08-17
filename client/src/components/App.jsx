@@ -72,7 +72,6 @@ class App extends React.Component {
    * set selected group to state for filtering task list
    */
   handleGroupSelect(e, index) {
-    e.preventDefault();
     let {groups} = this.state;
     let selected = groups[index];
 
@@ -83,7 +82,7 @@ class App extends React.Component {
   }
 
   /**
-   * 
+   * when 'ALL GROUPS' button clicked, hide task list
    */
   handleReturnClick() {
     this.setState({
