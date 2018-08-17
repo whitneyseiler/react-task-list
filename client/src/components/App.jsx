@@ -15,9 +15,7 @@ class App extends React.Component {
       displayGroup: null
     }
 
-    this.remove = this.remove.bind(this);
     this.handleGroupSelect = this.handleGroupSelect.bind(this);
-    this.handleReturnClick = this.handleReturnClick.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.getParentTasks = this.getParentTasks.bind(this);
   }
@@ -37,16 +35,10 @@ class App extends React.Component {
     
     this.setState({
       tasks: tasks,
-      groups: taskGroups
+      groups: [...taskGroups, "See All Tasks"]
     }, () => {
       this.getParentTasks()
     })
-  }
-
-  remove(todo) {
-    // this.setState({
-    //     todos: this.state.todos.filter(el => el !== todo)
-    // })
   }
 
   handleGroupSelect(e, index) {
@@ -59,20 +51,14 @@ class App extends React.Component {
       displayList: true
     })
   }
-
-  handleReturnClick(e) {
-    this.setState({
-      displayList: false
-    })
-  }
-
+  
   handleTaskClick(e, index) {
     let tasks = this.state.tasks;
     let task = tasks[index]
     var date = new Date();
     var utcDate = date.toUTCString();
 
-    if (task.locked === true) {
+    if (task.locked) {
       alert('task locked')
     } else {
       if (task.completedAt === null) {
@@ -80,7 +66,6 @@ class App extends React.Component {
       } else {
         task.completedAt = null;
       }
-
       this.setState({
         tasks: tasks
       })
@@ -88,23 +73,27 @@ class App extends React.Component {
     }
   }
 
-  checkTaskStatus(index) {
+  checkTaskStatus(currentIndex) {
     let tasks = this.state.tasks;
-    let currentTask = tasks[index];
-    let parents = this.state.parentTasks;
+    let dependencies = this.state.dependencies;
 
-    //if current task is a parent task
-    if (parents[currentTask.id]) {
-      let dependents = parents[currentTask.id];
+    let complete = function(index) {
+      if (tasks[index].completedAt !== null) {
+        return true;
+      }
+    }
 
-      //for each task in task list
-      for (var i = 0; i < tasks.length; i++) {
-        //if task is a dependent of current task
-        if (dependents.includes(i)) {
-          tasks[i].locked = !tasks[i].locked;
+    //for each index in dependencies
+    for (var index in dependencies) {
+      //if list of parents includes current index
+      if (dependencies[index].includes(currentIndex)) {
+        //for for each parent index
+        if (dependencies[index].every(complete)) {
+          tasks[index].locked = false;
         }
       }
     }
+
     this.setState({
       tasks: tasks
     })
@@ -113,46 +102,51 @@ class App extends React.Component {
   getParentTasks() {
     console.log('parent check')
     let tasks = this.state.tasks;
-    let parents = {};
+    let dependencies = {};
 
     for (var i = 0; i < tasks.length; i++) {
-      let task = tasks[i];
-
-      if (task.dependencyIds.length) {
-        task.dependencyIds.forEach((parentId) => {
-          if (parents[parentId]) {
-            parents[parentId].push(i); 
-          } else {
-            parents[parentId] = [i];
+      let taskIndex = i;
+      let parents = tasks[i].dependencyIds;
+      if (parents.length) {
+        for (var j = 0; j < tasks.length; j++) {
+          if (parents.includes(tasks[j].id)) {
+            if (dependencies[i]) {
+              dependencies[i].push(j)
+            } else {
+              dependencies[i] = [j];
+            }
           }
-        })
+        }
       }
     }
+
     this.setState({
-      parentTasks: parents
+      dependencies: dependencies
+    }, () => {
+      console.log(JSON.stringify(this.state.parentTasks))
     })
   }
 
   render () {
-    if (this.state.displayList === false) {
-      return (
+
+    let tasks = this.state.displayGroup === "See All Tasks" ? this.state.tasks :
+      this.state.tasks.filter(task => task.group === this.state.displayGroup)
+
+    return (
+      <div id="main">
         <GroupList 
           groups={this.state.groups} 
           displayList={this.state.displayList} 
           handleGroupSelect={this.handleGroupSelect} 
         />
-      )
-    } else {
-      return (
         <TaskList 
-          tasks={this.state.tasks} 
-          handleReturnClick={this.handleReturnClick}
+          tasks={tasks} 
           displayList={this.state.displayList} 
           displayGroup={this.state.displayGroup} 
           handleTaskClick={this.handleTaskClick}
         />
-      )
-    }
+      </div>
+    )
   }
 }
 
