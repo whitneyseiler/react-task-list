@@ -18,10 +18,11 @@ body {
     flex: 6;
 }
 
-#return-to-list {
+#return-button {
     flex: 1;
     margin-left: 30px;
     padding: 5px;
+    min-width: 80px;
     border: none;
     color: dodgerblue;
 }
