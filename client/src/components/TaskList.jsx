@@ -8,7 +8,7 @@ const TaskList = ({tasks, handleReturnClick, displayGroup, displayList, handleTa
         <div id="task-list">
             <h1>Task Group: {displayGroup}</h1>
             <ul>
-                {displayList && displayGroup ? 
+                {displayList ? 
                     tasks.map((task, i) => (
                         <Task key={i} index={i} task={task} locked={task.locked} handleClick={handleTaskClick}/>
                     )) 

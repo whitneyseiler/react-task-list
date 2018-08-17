@@ -20,8 +20,12 @@ class App extends React.Component {
     this.getParentTasks = this.getParentTasks.bind(this);
   }
 
+  /**
+   * on mount, generate task group list and set all tasks 
+   * 'locked' prop to true
+   */
   componentDidMount() {
-    let tasks = this.props.tasks;
+    let {tasks} = this.props;
     let taskGroups = [];
     
     tasks.forEach((task) => {
@@ -41,9 +45,12 @@ class App extends React.Component {
     })
   }
 
+  /**
+   * set selected group to state for filtering task list
+   */
   handleGroupSelect(e, index) {
     e.preventDefault();
-    let groups = this.state.groups;
+    let {groups} = this.state;
     let selected = groups[index];
 
     this.setState({
@@ -51,12 +58,16 @@ class App extends React.Component {
       displayList: true
     })
   }
-  
+
+  /**
+   *  update tasks 'completedAt' prop and check
+   *  if it can be unlocked
+   */
   handleTaskClick(e, index) {
-    let tasks = this.state.tasks;
+    let {tasks} = this.state;
     let task = tasks[index]
-    var date = new Date();
-    var utcDate = date.toUTCString();
+    let date = new Date();
+    let utcDate = date.toUTCString();
 
     if (task.locked) {
       alert('task locked')
@@ -73,9 +84,13 @@ class App extends React.Component {
     }
   }
 
+  /**
+   * check if task is dependent on other tasks and
+   * unlock if all parent tasks are complete
+   */
   checkTaskStatus(currentIndex) {
-    let tasks = this.state.tasks;
-    let dependencies = this.state.dependencies;
+    let {tasks} = this.state;
+    let {dependencies} = this.state;
 
     let complete = function(index) {
       if (tasks[index].completedAt !== null) {
@@ -83,11 +98,8 @@ class App extends React.Component {
       }
     }
 
-    //for each index in dependencies
     for (var index in dependencies) {
-      //if list of parents includes current index
       if (dependencies[index].includes(currentIndex)) {
-        //for for each parent index
         if (dependencies[index].every(complete)) {
           tasks[index].locked = false;
         }
@@ -98,23 +110,22 @@ class App extends React.Component {
       tasks: tasks
     })
   }
-
+  
+  /**
+   * create list of indeces of tasks with dependent tasks as key
+   * and array of their parent tasks as value
+   */
   getParentTasks() {
-    console.log('parent check')
     let tasks = this.state.tasks;
     let dependencies = {};
 
     for (var i = 0; i < tasks.length; i++) {
-      let taskIndex = i;
       let parents = tasks[i].dependencyIds;
+
       if (parents.length) {
         for (var j = 0; j < tasks.length; j++) {
           if (parents.includes(tasks[j].id)) {
-            if (dependencies[i]) {
-              dependencies[i].push(j)
-            } else {
-              dependencies[i] = [j];
-            }
+            dependencies[i] ? dependencies[i].push(j) : dependencies[i] = [j];
           }
         }
       }
@@ -122,13 +133,12 @@ class App extends React.Component {
 
     this.setState({
       dependencies: dependencies
-    }, () => {
-      console.log(JSON.stringify(this.state.parentTasks))
     })
   }
 
   render () {
 
+    //filter task list according to selected group or "See All" option
     let tasks = this.state.displayGroup === "See All Tasks" ? this.state.tasks :
       this.state.tasks.filter(task => task.group === this.state.displayGroup)
 
