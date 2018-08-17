@@ -8,10 +8,7 @@ const Task = ({index, id, task, locked, handleClick}) => {
     let taskClasses = [completeStatus, lockedStatus];
 
     return (
-        <li 
-            className={taskClasses.join(' ')}
-            onClick={(e) => {handleClick(e, index)}}
-        >{task.task}</li>
+        <li className={taskClasses.join(' ')} onClick={(e) => {handleClick(e, id)}}>{task.task}</li>
     )
 }
 export default Task;

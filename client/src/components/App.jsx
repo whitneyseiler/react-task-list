@@ -14,25 +14,23 @@ class App extends React.Component {
       displayList: false,
       displayGroup: null
     }
-
-    this.handleGroupSelect = this.handleGroupSelect.bind(this);
-    this.handleTaskClick = this.handleTaskClick.bind(this);
+    
     this.getParentTasks = this.getParentTasks.bind(this);
+    this.handleGroupSelect = this.handleGroupSelect.bind(this);
+    this.handleReturnClick = this.handleReturnClick.bind(this);
+    this.handleTaskClick = this.handleTaskClick.bind(this);
   }
-
+  
   /**
    * on mount, generate task group list and set all tasks 
    * 'locked' prop to true
    */
   componentDidMount() {
-    let {tasks} = this.props;
-    let taskGroups = [];
-    
+    let {tasks} = this.props;  
+    const taskGroups = new Set(tasks.map(task => task.group))
+
     tasks.forEach((task) => {
-      if (!taskGroups.includes(task.group)) {
-        taskGroups.push(task.group);
-      }
-      if (task.dependencyIds.length) {
+      if (task.dependencyIds.length > 0) {
         task.locked = true;
       }
     })
@@ -42,6 +40,31 @@ class App extends React.Component {
       groups: [...taskGroups, "See All Tasks"]
     }, () => {
       this.getParentTasks()
+    })
+  }
+  
+  /**
+   * create list of indeces of tasks with dependent tasks as key
+   * and array of their parent tasks as value
+   */
+  getParentTasks() {
+    let {tasks} = this.state;
+    let dependencies = {};
+
+    for (var i = 0; i < tasks.length; i++) {
+      let parents = tasks[i].dependencyIds;
+
+      if (parents.length) {
+        for (var j = 0; j < tasks.length; j++) {
+          if (parents.includes(tasks[j].id)) {
+            dependencies[i] ? dependencies[i].push(j) : dependencies[i] = [j];
+          }
+        }
+      }
+    }
+
+    this.setState({
+      dependencies: dependencies
     })
   }
 
@@ -60,26 +83,36 @@ class App extends React.Component {
   }
 
   /**
+   * 
+   */
+  handleReturnClick() {
+    this.setState({
+      displayList: false
+    })
+  }
+
+  /**
    *  update tasks 'completedAt' prop and check
    *  if it can be unlocked
    */
-  handleTaskClick(e, index) {
+  handleTaskClick(e, id) {
     let {tasks} = this.state;
-    let task = tasks[index]
     let date = new Date();
     let utcDate = date.toUTCString();
+    // let task, index; 
+
+    let task = tasks.filter(task => task.id === id)[0];
+    let index = tasks.indexOf(task);
 
     if (task.locked) {
       alert('task locked')
     } else {
       if (task.completedAt === null) {
         task.completedAt = utcDate
-      } else {
+      } else if (task.completedAt !== null) {
         task.completedAt = null;
       }
-      this.setState({
-        tasks: tasks
-      })
+
       this.checkTaskStatus(index)
     }
   }
@@ -102,6 +135,8 @@ class App extends React.Component {
       if (dependencies[index].includes(currentIndex)) {
         if (dependencies[index].every(complete)) {
           tasks[index].locked = false;
+        } else {
+          tasks[index].locked = true;
         }
       }
     }
@@ -111,30 +146,6 @@ class App extends React.Component {
     })
   }
   
-  /**
-   * create list of indeces of tasks with dependent tasks as key
-   * and array of their parent tasks as value
-   */
-  getParentTasks() {
-    let tasks = this.state.tasks;
-    let dependencies = {};
-
-    for (var i = 0; i < tasks.length; i++) {
-      let parents = tasks[i].dependencyIds;
-
-      if (parents.length) {
-        for (var j = 0; j < tasks.length; j++) {
-          if (parents.includes(tasks[j].id)) {
-            dependencies[i] ? dependencies[i].push(j) : dependencies[i] = [j];
-          }
-        }
-      }
-    }
-
-    this.setState({
-      dependencies: dependencies
-    })
-  }
 
   render () {
 
@@ -144,17 +155,21 @@ class App extends React.Component {
 
     return (
       <div id="main">
-        <GroupList 
-          groups={this.state.groups} 
-          displayList={this.state.displayList} 
-          handleGroupSelect={this.handleGroupSelect} 
-        />
-        <TaskList 
-          tasks={tasks} 
-          displayList={this.state.displayList} 
-          displayGroup={this.state.displayGroup} 
-          handleTaskClick={this.handleTaskClick}
-        />
+        {!this.state.displayList ?
+          <GroupList 
+            groups={this.state.groups} 
+            displayList={this.state.displayList} 
+            handleGroupSelect={this.handleGroupSelect} 
+          />
+            :
+          <TaskList 
+            tasks={tasks} 
+            displayList={this.state.displayList} 
+            displayGroup={this.state.displayGroup}
+            handleReturnClick={this.handleReturnClick}
+            handleTaskClick={this.handleTaskClick}
+          />
+        }
       </div>
     )
   }

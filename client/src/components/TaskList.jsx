@@ -6,11 +6,14 @@ const TaskList = ({tasks, handleReturnClick, displayGroup, displayList, handleTa
 
     return (
         <div id="task-list">
-            <h1>{displayGroup ? `Task Group: ${displayGroup}` : "Select A Group"}</h1>
+            <div id="task-list-header">
+                <h1 id="task-header" >{displayGroup ? `Task Group: ${displayGroup}` : "Select A Group"}</h1>
+                <button id="return-to-list" onClick={handleReturnClick}>ALL GROUPS</button>
+            </div>
             <ul>
                 {displayList ? 
                     tasks.map((task, i) => (
-                        <Task key={i} index={i} task={task} locked={task.locked} handleClick={handleTaskClick}/>
+                        <Task key={i} id={task.id} task={task} locked={task.locked} handleClick={handleTaskClick}/>
                     )) 
                     : <p>...no task group selected</p>
                 }
