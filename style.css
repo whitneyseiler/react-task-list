@@ -6,15 +6,24 @@ body {
     display: flex;
     flex-direction: row;
     padding: 20px;
-}
-
-#group-list {
-    width: 30%;
     padding-left: 80px;
 }
 
-#task-list {
-    width: 70%
+#task-list-header {
+    display: flex;
+    flex-direction: row;
+}
+
+#task-header {
+    flex: 6;
+}
+
+#return-to-list {
+    flex: 1;
+    margin-left: 30px;
+    padding: 5px;
+    border: none;
+    color: dodgerblue;
 }
 
 li.group {
