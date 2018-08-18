@@ -10,14 +10,16 @@ const GroupList = ({groups, tasks, handleGroupSelect, completed}) => {
             <h1>Things To Do</h1>
             <ul className="group-list">
                 {groups.map((group, index) => (
-                    <Group 
-                        key={index} 
-                        index={index} 
-                        taskCount={(group === "See All Tasks" ? tasks : tasks.filter(task => task.group === group)).length} 
-                        group={group} 
-                        handleGroupSelect={handleGroupSelect}
-                        completed={completed} 
-                    />
+                    <div>
+                        <Group 
+                            key={index} 
+                            index={index} 
+                            taskCount={(group === "See All Tasks" ? tasks : tasks.filter(task => task.group === group)).length} 
+                            group={group} 
+                            handleGroupSelect={handleGroupSelect}
+                            completed={completed} 
+                        />
+                    </div>
                 ))}
             </ul>
         </div>

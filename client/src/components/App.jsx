@@ -23,8 +23,7 @@ class App extends React.Component {
   }
   
   /**
-   * on mount, generate task group list and set all tasks 
-   * 'locked' prop to true
+   * on mount, generate task group list and set all tasks 'locked' prop to true
    */
   componentDidMount() {
     let {tasks} = this.props;  
