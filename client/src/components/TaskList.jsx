@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react';
 import Task from './Task.jsx';
 
-const TaskList = ({tasks, handleReturnClick, displayGroup, displayList, handleTaskClick}) => {
+const TaskList = ({tasks, handleReturnClick, displayGroup, displayTaskList, handleTaskClick}) => {
 
     //filter task list according to selected group or "See All" option
     tasks = displayGroup === "See All Tasks" ? tasks : tasks.filter(task => task.group === displayGroup);
@@ -14,7 +14,7 @@ const TaskList = ({tasks, handleReturnClick, displayGroup, displayList, handleTa
                 <button id="return-button" onClick={handleReturnClick}>ALL GROUPS</button>
             </div>
             <ul>
-                {displayList ? 
+                {displayTaskList ? 
                     tasks.map((task, i) => (
                         <Task key={i} id={task.id} task={task} locked={task.locked} handleClick={handleTaskClick}/>
                     )) 

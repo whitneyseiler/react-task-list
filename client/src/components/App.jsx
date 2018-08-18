@@ -11,7 +11,7 @@ class App extends React.Component {
     this.state = {
       tasks: [],
       groups: [],
-      displayList: false,
+      displayTaskList: false,
       displayGroup: null
     }
     
@@ -78,7 +78,7 @@ class App extends React.Component {
 
     this.setState({
       displayGroup: selected,
-      displayList: true
+      displayTaskList: true
     })
   }
 
@@ -87,7 +87,7 @@ class App extends React.Component {
    */
   handleReturnClick() {
     this.setState({
-      displayList: false
+      displayTaskList: false
     })
   }
 
@@ -99,7 +99,6 @@ class App extends React.Component {
     let {tasks} = this.state;
     let date = new Date();
     let utcDate = date.toUTCString();
-    // let task, index; 
 
     let task = tasks.filter(task => task.id === id)[0];
     let index = tasks.indexOf(task);
@@ -112,7 +111,6 @@ class App extends React.Component {
       } else if (task.completedAt !== null) {
         task.completedAt = null;
       }
-
       this.checkTaskStatus(index)
     }
   }
@@ -140,13 +138,12 @@ class App extends React.Component {
         }
       }
     }
-    // console.log(tasks)
-    // this.setState({
-    //   tasks: tasks
-    // })
     this.getCompletedCount(tasks) 
   }
   
+  /**
+   * get count of completed tasks per group to display in GroupList
+   */
   getCompletedCount(tasks) {
     let {groups} = this.state;
     let completed = {};
@@ -165,22 +162,21 @@ class App extends React.Component {
   }
 
   render () {
-    
     return (
       <div id="main">
-        {!this.state.displayList ?
+        {!this.state.displayTaskList ?
           <GroupList 
             groups={this.state.groups}
             tasks={this.state.tasks}
             completed={this.state.completed}
-            displayList={this.state.displayList} 
+            displayTaskList={this.state.displayTaskList} 
             handleGroupSelect={this.handleGroupSelect}
             completedCount={this.getCompletedCount} 
           />
             :
           <TaskList 
             tasks={this.state.tasks} 
-            displayList={this.state.displayList} 
+            displayTaskList={this.state.displayTaskList} 
             displayGroup={this.state.displayGroup}
             handleReturnClick={this.handleReturnClick}
             handleTaskClick={this.handleTaskClick}

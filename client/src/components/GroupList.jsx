@@ -13,7 +13,7 @@ const GroupList = ({groups, tasks, handleGroupSelect, completed}) => {
                     <Group 
                         key={index} 
                         index={index} 
-                        tasks={group === "See All Tasks" ? tasks : tasks.filter(task => task.group === group)} 
+                        taskCount={(group === "See All Tasks" ? tasks : tasks.filter(task => task.group === group)).length} 
                         group={group} 
                         handleGroupSelect={handleGroupSelect}
                         completed={completed} 

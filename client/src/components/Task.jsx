@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react';
 
 const Task = ({index, id, task, locked, handleClick}) => {
+    
     //apply task classes based on completion and locked status
     let completeStatus = (task.completedAt === null ? "incomplete" : "completed");
     let lockedStatus = (locked === true ? "locked" : null);
