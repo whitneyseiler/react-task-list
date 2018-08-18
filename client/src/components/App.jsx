@@ -19,6 +19,7 @@ class App extends React.Component {
     this.handleGroupSelect = this.handleGroupSelect.bind(this);
     this.handleReturnClick = this.handleReturnClick.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
+    this.getCompletedCount = this.getCompletedCount.bind(this);
   }
   
   /**
@@ -139,30 +140,46 @@ class App extends React.Component {
         }
       }
     }
-
-    this.setState({
-      tasks: tasks
-    })
+    // console.log(tasks)
+    // this.setState({
+    //   tasks: tasks
+    // })
+    this.getCompletedCount(tasks) 
   }
   
+  getCompletedCount(tasks) {
+    let {groups} = this.state;
+    let completed = {};
+    let count = 0;
+
+    tasks.forEach((task) => {
+      if (task.completedAt) {
+        completed[task.group] ? completed[task.group]++ : completed[task.group] = 1;
+      }
+    })
+
+    this.setState({
+      tasks: tasks,
+      completed: completed
+    })
+  }
 
   render () {
-
-    //filter task list according to selected group or "See All" option
-    let tasks = this.state.displayGroup === "See All Tasks" ? this.state.tasks :
-      this.state.tasks.filter(task => task.group === this.state.displayGroup)
-
+    
     return (
       <div id="main">
         {!this.state.displayList ?
           <GroupList 
-            groups={this.state.groups} 
+            groups={this.state.groups}
+            tasks={this.state.tasks}
+            completed={this.state.completed}
             displayList={this.state.displayList} 
-            handleGroupSelect={this.handleGroupSelect} 
+            handleGroupSelect={this.handleGroupSelect}
+            completedCount={this.getCompletedCount} 
           />
             :
           <TaskList 
-            tasks={tasks} 
+            tasks={this.state.tasks} 
             displayList={this.state.displayList} 
             displayGroup={this.state.displayGroup}
             handleReturnClick={this.handleReturnClick}

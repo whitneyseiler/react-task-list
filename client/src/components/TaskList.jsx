@@ -4,6 +4,9 @@ import Task from './Task.jsx';
 
 const TaskList = ({tasks, handleReturnClick, displayGroup, displayList, handleTaskClick}) => {
 
+    //filter task list according to selected group or "See All" option
+    tasks = displayGroup === "See All Tasks" ? tasks : tasks.filter(task => task.group === displayGroup);
+
     return (
         <div id="task-list">
             <div id="task-list-header">

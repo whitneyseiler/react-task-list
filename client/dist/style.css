@@ -9,6 +9,11 @@ body {
     padding-left: 80px;
 }
 
+.completed-count {
+    color: grey;
+    font-size: 12px;
+}
+
 #task-list-header {
     display: flex;
     flex-direction: row;
