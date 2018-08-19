@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react';
 import GroupList from './GroupList.jsx';
 import TaskList from './TaskList.jsx';
-import Task from './Task.jsx';
 
 class App extends React.Component {
   constructor(props) {

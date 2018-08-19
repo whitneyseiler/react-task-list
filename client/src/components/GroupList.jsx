@@ -5,25 +5,25 @@ import Group from './Group.jsx';
 
 const GroupList = ({groups, tasks, handleGroupSelect, completed}) => {
 
-    return (
-        <div id="group-list">
-            <h1>Things To Do</h1>
-            <ul className="group-list">
-                {groups.map((group, index) => (
-                    <div>
-                        <Group 
-                            key={index} 
-                            index={index} 
-                            taskCount={(group === "See All Tasks" ? tasks : tasks.filter(task => task.group === group)).length} 
-                            group={group} 
-                            handleGroupSelect={handleGroupSelect}
-                            completed={completed} 
-                        />
-                    </div>
-                ))}
-            </ul>
-        </div>
-    )
+	return (
+		<div id="group-list">
+			<div id="group-list-header">
+				<h2>Things To Do</h2>
+			</div>
+			<ul className="group-list">
+				{groups.map((group, index) => (
+					<Group 
+						key={index} 
+						index={index} 
+						taskCount={(group === "See All Tasks" ? tasks : tasks.filter(task => task.group === group)).length} 
+						group={group} 
+						handleGroupSelect={handleGroupSelect}
+						completed={completed} 
+					/>
+				))}
+			</ul>
+		</div>
+	)
 }
 
 export default GroupList;
