@@ -9,8 +9,8 @@ const TaskList = ({tasks, handleReturnClick, displayGroup, displayTaskList, hand
 
 	return (
 		<div id="task-list">
-			<div id="task-list-header">
-				<h2 id="task-header" >{displayGroup ? `Task Group: ${displayGroup}` : "Select A Group"}</h2>
+			<div className="header task-list">
+				<h2 id="task-list-title" >{displayGroup ? `Task Group: ${displayGroup}` : "Select A Group"}</h2>
 				<button id="return-button" onClick={handleReturnClick}>ALL GROUPS</button>
 			</div>
 			<ul>

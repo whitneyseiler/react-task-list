@@ -19,7 +19,7 @@ const Group = ({taskCount, group, index, handleGroupSelect, completed}) => {
 	}
 
 	return (
-		<li className="group" onClick={(e) => handleGroupSelect(e, index)}>
+		<li className="list-item group" onClick={(e) => handleGroupSelect(e, index)}>
 			<span>{group}</span><br/>
 			<span className="completed-count">{completed} OF {taskCount} TASKS COMPLETE</span>
 		</li>

@@ -7,7 +7,7 @@ const GroupList = ({groups, tasks, handleGroupSelect, completed}) => {
 
 	return (
 		<div id="group-list">
-			<div id="group-list-header">
+			<div className="header group-list">
 				<h2>Things To Do</h2>
 			</div>
 			<ul className="group-list">
