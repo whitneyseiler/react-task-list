@@ -3,60 +3,61 @@ body {
 }
 
 #main {
-    display: flex;
-    flex-direction: row;
-    margin: 40px;
-    padding-left: 80px;
+    margin: 5%;
+    padding-left: 10%;
 }
 
 #task-list, #group-list {
-    width: 75%;
+    width: 90%;
 }
 
-#group-list-header {
+.header {
     display: flex;
 }
 
-#task-list-header {
-    display: flex;
+.task-list {
     flex-direction: row;
     flex-wrap: nowrap;
 }
 
-#task-header {
+#task-list-title {
     flex: 6;
 }
 
 #return-button {
-    flex: 1;
-    position: relative;
-    top: 26px;
-    padding-right: 0px;
-    min-width: 100px;
-    height: 20px;
     border: none;
     color: dodgerblue;
+    flex: 1;
     font-size: 14px;
+    height: 20px;
+    min-width: 100px;
+    position: relative;
+    padding-right: 0px;
+    top: 26px;
 }
 
 ul {
     list-style: none;
-    padding-left: 0px;
     list-style-position: inside;
+    padding-left: 0px;
 }​
 
 li {
     list-style-type: disc;
-    margin: 10px 0;
 }
 
-li.group {
-    background-image: url('../assets/Group.svg');
+.list-item {
     background-repeat: no-repeat;
     background-position: 0px 50%;
-    background-size: 6px;
+    background-size: 12px;
     border-top: 1px solid lightgrey;
     font-weight: bold;
+    padding: 30px;
+}
+
+.group {
+    background-image: url('../assets/Group.svg');
+    background-size: 6px;
     padding: 21px 30px;
 }
 
@@ -66,33 +67,16 @@ li.group {
     font-weight: normal;
 }
 
-li.completed {
+.completed {
     background-image: url('../assets/Completed.svg');
-    background-repeat: no-repeat;
-    background-position: 0px 50%;
-    background-size: 12px;
-    border-top: 1px solid lightgrey;
-    padding: 30px;
-    font-weight: bold;
     text-decoration: line-through;
 }
 
-li.incomplete {
+.incomplete {
     background-image: url('../assets/Incomplete.svg');
-    background-repeat: no-repeat;
-    background-position: 0px 50%;
-    background-size: 12px;
-    border-top: 1px solid lightgrey;
-    padding: 30px;
-    font-weight: bold;
 }
 
-li.locked {
+.locked {
     background-image: url('../assets/Locked.svg');
-    background-repeat: no-repeat;
-    background-position: 0px 50%;
     background-size: 10px;
-    border-top: 1px solid lightgrey;
-    padding: 30px;
-    font-weight: bold;
 }
