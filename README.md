@@ -1,5 +1,5 @@
 # react-task-list
-Completed as a coding exercise for Wonderschool. Live demo can be found [here](https://whitneyseiler.github.io/react-task-list/).
+Completed as a [coding challenge](https://www.dropbox.com/sh/8icefhbj8w39t20/AAAIuaNcW-1yd_rS36JLmqqoa?dl=0) for Wonderschool. Full writeup of challenge can be found in [assets](client/dist/assets/README.txt) Live demo can be found [here](https://whitneyseiler.github.io/react-task-list/).
 
 # How to Run Locally
 1. Install dependencies: `-npm install`
@@ -7,6 +7,17 @@ Completed as a coding exercise for Wonderschool. Live demo can be found [here](h
 5. Start server: `-npm start`
 
 To start, in your browser navigate to: http://localhost:3000
+
+# Prompt Responses
+1. Build the UI for a grouped task list with task dependencies
+   * this UI was created using Javascript, React, and Webpack to mimic the [mockup image](/client/dist/assets/Task List.png)
+   * provided assets are stored in [client/dist/assets](client/dist/assets)
+2. Design the SQL database schema to store all required task list data.
+   * schema can be found in [/db/task-list-schema.sql](db/task-list-schema.sql);
+   * schema mockup can be found in [/db/schema_mockup.png](db/schema_mockup.png)
+3. Document an HTTP API for checking and unchecking a Task
+   * API Documentation can be found in [APIDocs.md](APIDocs.md)
+
 
 # Changes I would have made given more time: 
 - [ ] add app title
