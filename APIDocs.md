@@ -4,14 +4,26 @@
   The API response will let you know whether a task is locked or not (meaning its parent task has not yet been completed), and, if not, will change its status from incomplete to completed, or vice versa.
 
 ## TABLE OF CONTENTS ##
-1. [`URL`](#URL)
-2. [`METHODS`](#METHODS)
+1. [`What's a RESTful API?`](#What's-a-RESTful-API?)
+2. [`URL`](#URL)
+3. [`METHODS`](#METHODS)
     * [`GET`](#GET)
     * [`PUT`](#PUT)
     * [`POST`](#POST)
     * [`DELETE`](#DELETE)
-3. [`RESPONSES`](#RESPONSES)
-4. [`SAMPLE CALL`](#SAMPLE-CALL)
+4. [`RESPONSES`](#RESPONSES)
+5. [`SAMPLE CALL`](#SAMPLE-CALL)
+
+## What's a RESTful API? ## 
+
+REST stands for Representational State Transfer and refers to an architectural style and communications approach that uses HTTP protocol to GET, PUT, POST and DELETE data. There are six primary constraints that define a RESTful API: 
+
+1. *CLIENT-SERVER:* That the client and server remain separate and function independently.
+2. *STATELESS:* That all data must be stored in the client, not the server, and each call contains all of the data necessary to be completed.
+3. *CACHE:* That RESTful API responses should indicate whether data can be stored and for how long to reduce server overhead and encourage users to build the most efficient apps possible.
+4. *UNIFORM INTERFACE:* That four architecture constraints should be used to guide the behavior of components: identification of resources; manipulation of resources through representations, self-descriptive messages, and, hypermedia as the engine of application state. 
+5. *LAYERED SYSTEM:* That the API architecture is composed of heirarchical layers by constraining component behavior so that each component can only access the layer with which they are interacting.
+6. *CODE ON DEMAND (optional):* That a server can extend the client's functionality on runtime by sending code or applets to the client to execute.
 
 
 ## URL ##
@@ -32,7 +44,7 @@
 * **Fetching Tasks:**
 
   ```
-  GET https://api.reacttasklist.com/tasks/id={optional: task_id}
+  GET https://api.reacttasklist.com/tasks/:task_id
   ```
 
   *If no task id is included, all tasks will be displayed*
@@ -40,7 +52,7 @@
 * **See All Tasks By Group:**
 
   ```
-  GET https://api.reacttasklist.com/groups/group={optional: group name}
+  GET https://api.reacttasklist.com/groups/:group name
   ```
 
   *If no group name is included, all tasks in that group will be displayed*
@@ -51,10 +63,10 @@
 * **Checking & Unchecking tasks, Editing/Updating Tasks or Groups:**
 
   ```
-  PUT https://api.reacttasklist.com/tasks/id={task_id}
+  PUT https://api.reacttasklist.com/tasks/:task_id
   ```
   ```
-  PUT https://api.reacttasklist.com/groups/group={group_id}
+  PUT https://api.reacttasklist.com/groups/:group_id
   ```
 
   *App logic prevents locked tasks from being clicked*
@@ -68,7 +80,7 @@
 * **Adding Tasks:**
 
   ```
-  POST https://api.reacttasklist.com/tasks/id={task_id}
+  POST https://api.reacttasklist.com/tasks/:task_id
   ```
 
   *This route and method would be used if the app functionality expanded to include a form for the user to add a new task*
@@ -76,7 +88,7 @@
 * **Adding new groups:**
 
   ```
-  POSThttps://api.reacttasklist.com/groups/group={group_id}
+  POSThttps://api.reacttasklist.com/groups/:group_id
   ```
 
   *This route and method would be used if the app functionality expanded to include a form for the user to add a new group*
@@ -87,10 +99,10 @@
 * **Removing Tasks or Groups:**
 
   ```
-  DELETE https://api.reacttasklist.com/tasks/id={task_id}
+  DELETE https://api.reacttasklist.com/tasks/:task_id
   ```
    ```
-  DELETE https://api.reacttasklist.com/groups/id={group_id}
+  DELETE https://api.reacttasklist.com/groups/:group_id
   ```
 
   *This method would be used if the app functionality expanded to allow the user to delete an existing task or group*
