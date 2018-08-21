@@ -1,5 +1,5 @@
 # react-task-list
-Completed as a [coding challenge](https://www.dropbox.com/sh/8icefhbj8w39t20/AAAIuaNcW-1yd_rS36JLmqqoa?dl=0) for Wonderschool. Full writeup of challenge can be found in [assets](client/dist/assets/README.txt) Live demo can be found [here](https://whitneyseiler.github.io/react-task-list/).
+Completed as a [coding challenge](https://www.dropbox.com/sh/8icefhbj8w39t20/AAAIuaNcW-1yd_rS36JLmqqoa?dl=0) for Wonderschool. Full writeup of challenge can be found in [client/dist/assets/README.txt](client/dist/assets/README.txt). Live demo can be found [here](https://whitneyseiler.github.io/react-task-list/).
 
 # How to Run Locally
 1. Install dependencies: `-npm install`
