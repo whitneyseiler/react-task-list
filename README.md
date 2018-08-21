@@ -16,7 +16,7 @@ To start, in your browser navigate to: http://localhost:3000
    * schema can be found in [/db/task-list-schema.sql](db/task-list-schema.sql);
    * schema mockup can be found in [/db/schema_mockup.png](db/schema_mockup.png)
 3. Document an HTTP API for checking and unchecking a Task
-   * API Documentation can be found in [APIDocs.md](APIDocs.md)
+   * API Documentation can be found in [docs/APIDocs.md](docs/APIDocs.md)
 
 
 # Changes I would have made given more time: 
