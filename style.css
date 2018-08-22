@@ -56,28 +56,27 @@ li {
 }
 
 .group {
-    background-image: url('assets/Group.svg');
+    background-image: url('https://whitneyseiler.github.io/react-task-list/client/dist/assets/Group.svg');
     background-size: 6px;
     padding: 21px 30px;
 }
 
 .completed-count {
     color: grey;
-    font-size: 12px;
+    font-size: 12px; 
     font-weight: normal;
 }
 
 .completed {
-    background-image: url('assets/Completed.svg');
+    background-image: url('https://whitneyseiler.github.io/react-task-list/client/dist/assets/Completed.svg');
     text-decoration: line-through;
 }
 
 .incomplete {
-    background-image: url('assets/Incomplete.svg');
-    background-size: 14px;
+    background-image: url('https://whitneyseiler.github.io/react-task-list/client/dist/assets/Incomplete.svg');
 }
 
 .locked {
-    background-image: url('assets/Locked.svg');
+    background-image: url('https://whitneyseiler.github.io/react-task-list/client/dist/assets/Locked.svg');
     background-size: 10px;
 }
