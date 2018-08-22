@@ -68,12 +68,12 @@ li {
 }
 
 .completed {
-    background-image: url('.assets/Completed.svg');
+    background-image: url('./assets/Completed.svg');
     text-decoration: line-through;
 }
 
 .incomplete {
-    background-image: url('.assets/Incomplete.svg');
+    background-image: url('./assets/Incomplete.svg');
 }
 
 .locked {
